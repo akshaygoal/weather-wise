@@ -1,3 +1,4 @@
+
 .Nav-container {
   display: flex;
   justify-content: space-between;
@@ -62,10 +63,9 @@
 .weather-container {
   display: flex;
   justify-content: center;
- 
   width: 100%;
   height: auto;
-  padding: 20px;
+  padding: 10px;
   text-align: center;
   background-color: #ffffff;
 }
@@ -109,4 +109,82 @@
 }
 .details p{
     font-size: 25px;
+}
+.date-time {
+  position: absolute;
+  left: 60px;
+  top: 70px;
+ color: #ffffff;
+ font-size: 1.1rem;
+ letter-spacing: 1rem;
+ font-weight: 300;
+}
+@media screen and (max-width: 750px) {
+
+  .date-time {
+    position: absolute;
+    top: 5px;
+    right: 0;
+    font-size: 0.9rem;
+    font-weight: 300;
+  }
+  .search-div{
+    display: flex;
+    justify-content: start;
+    
+  }
+}
+.more-details{
+  height: auto;
+  margin-left: 2px;
+  width: 70%;
+  border-radius: 15px;
+  background: linear-gradient(30deg, rgb(76, 76, 232), rgb(239, 239, 239));
+}
+.sun-details{
+  display: flex;
+  width: 100%;
+  height: auto;
+  padding: 30px 40px 0px 30px;
+  justify-content: space-around;
+}
+.sun-details p{
+font-size: 1.2rem;
+}
+.details-icons{
+  font-size: 2rem;
+font-weight: 700;
+}
+.hour-container {
+  padding: 20px;
+  margin-top: 20px;
+}
+.hour-container h3 {
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  text-align: left;
+  font-weight: 600;
+}
+.details-main{
+  display: flex;
+  justify-content: space-between;
+  
+}
+.details-hour{
+  margin-top: 5px;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  min-width: 100px; 
+  max-width: 120px;
+}
+.details-hour p {
+  margin: 5px 0;
+  font-size: 1rem;
+}
+.details-hour:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
 }

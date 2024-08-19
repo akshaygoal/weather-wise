@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoIosSearch } from "react-icons/io";
+import { GiSunrise, GiSunset } from "react-icons/gi";
+import { FaTemperatureArrowUp, FaTemperatureArrowDown } from "react-icons/fa6";
 import { useStateContext } from "../Context/index";
+import { WiDayCloudy } from "react-icons/wi";
 import "./Home.css";
 import clouds from "../Assets/weather02-512.webp";
 import humidity from "../Assets/humidity.png";
@@ -12,10 +15,14 @@ function Home() {
   const [searchInput, setSearchInput] = useState("");
 
   const [weatherData, setWeatherData] = useState({
-    celecius: 15.25,
+    celecius: 18.25,
     name: "London",
-    humidity: 90,
-    speed: 4.12,
+    humidity: 70,
+    speed: 5.12,
+    sunrise: "06:00 AM",
+    sunset: "06:00 PM",
+    highTemp: 20,
+    lowTemp: 15,
   });
 
   const { weather, setWeather } = useStateContext(); // Access context
@@ -24,10 +31,7 @@ function Home() {
   const navigate = useNavigate();
   const userName = JSON.parse(localStorage.getItem("user"));
 
-  const handleLogout = () => {
-    localStorage.removeItem("loggedin");
-    navigate("/login");
-  };
+
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -42,27 +46,35 @@ function Home() {
         .then((res) => {
           console.log(res.data);
           setWeatherData({
-            ...weatherData,
-            celecius: res.data.main.temp,
+//             ...weatherData,
+//             celecius: res.data.main.temp,
+//             name: res.data.name,
+//             humidity: res.data.main.humidity,
+//             speed: res.data.wind.speed,
+//             sunrice :new Date(weatherData.sys.sunrise * 1000).toLocaleTimeString(),
+//             sunset:new Date(weatherData.sys.sunset * 1000).toLocaleTimeString(),
+// temp:res.data.main.temp
+celecius: res.data.main.temp,
             name: res.data.name,
             humidity: res.data.main.humidity,
             speed: res.data.wind.speed,
+            sunrise: new Date(res.data.sys.sunrise * 1000).toLocaleTimeString(),
+            sunset: new Date(res.data.sys.sunset * 1000).toLocaleTimeString(),
+            highTemp: res.data.main.temp_max,
+            lowTemp: res.data.main.temp_min,
+
           });
         })
         .catch((err) => console.log(err));
     }
   };
+  const date = new Date().toLocaleDateString();
 
   return (
     <div className="Home-container">
-      {/*<h1>Welcome home {userName.name}</h1>
-      
-      <button onClick={handleLogout} type="button">
-        LogOut
-      </button> */}
-
       <nav className="Nav-container">
         <h1>Weather Wisee</h1>
+        <h3 className="date-time">{date}</h3>
         <div className="search-div">
           <form onSubmit={handleSearch}>
             <input
@@ -98,6 +110,68 @@ function Home() {
               <div>
                 <p>{weatherData.speed}Km/h</p>
                 <p>Wind Speed</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="more-details">
+          <div className="sun-details">
+            <div>
+              <GiSunrise className="details-icons" />
+              <p>Rise:{weatherData.sunrise}</p>
+            </div>
+            <div>
+              <GiSunset className="details-icons" />
+              <p>Set: {weatherData.sunset}</p>
+            </div>
+
+            <div>
+              <FaTemperatureArrowUp className="details-icons" />
+              <p>High: {weatherData.highTemp}°c</p>
+            </div>
+            <div>
+              <FaTemperatureArrowDown className="details-icons" />
+              <p>Low:{weatherData.lowTemp}°c</p>
+            </div>
+          </div>
+          <div className="hour-container">
+            <h3>3 HOURS STEO FORECAST</h3>
+            <hr />
+            <div className="details-main">
+              <div className="details-hour">
+                <p>10:00 AM</p>
+                <p>
+                  <WiDayCloudy className="details-icons" />
+                </p>
+                <p>{weatherData.celecius}°</p>
+              </div>
+              <div className="details-hour">
+                <p>10:00 AM</p>
+                <p>
+                  <WiDayCloudy className="details-icons" />
+                </p>
+                <p>13°</p>
+              </div>
+              <div className="details-hour">
+                <p>10:00 AM</p>
+                <p>
+                  <WiDayCloudy className="details-icons" />
+                </p>
+                <p>13°</p>
+              </div>
+              <div className="details-hour">
+                <p>10:00 AM</p>
+                <p>
+                  <WiDayCloudy className="details-icons" />
+                </p>
+                <p>13°</p>
+              </div>
+                <div className="details-hour">
+                <p>10:00 AM</p>
+                <p>
+                  <WiDayCloudy className="details-icons" />
+                </p>
+                <p>13°</p>
               </div>
             </div>
           </div>
