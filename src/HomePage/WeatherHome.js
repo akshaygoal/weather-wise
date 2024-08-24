@@ -68,7 +68,9 @@ celecius: res.data.main.temp,
         .catch((err) => console.log(err));
     }
   };
-  const date = new Date().toLocaleDateString();
+   const date = new Date().toLocaleDateString();
+
+
 
   return (
     <div className="Home-container">
@@ -146,28 +148,69 @@ celecius: res.data.main.temp,
                 <p>{weatherData.celecius}°</p>
               </div>
               <div className="details-hour">
-                <p>10:00 AM</p>
+                <p>01:00 AM</p>
                 <p>
                   <WiDayCloudy className="details-icons" />
                 </p>
                 <p>13°</p>
               </div>
               <div className="details-hour">
-                <p>10:00 AM</p>
+                <p>03:00 AM</p>
                 <p>
                   <WiDayCloudy className="details-icons" />
                 </p>
                 <p>13°</p>
               </div>
               <div className="details-hour">
-                <p>10:00 AM</p>
+                <p>06:00 AM</p>
                 <p>
                   <WiDayCloudy className="details-icons" />
                 </p>
                 <p>13°</p>
               </div>
                 <div className="details-hour">
-                <p>10:00 AM</p>
+                <p>09:00 AM</p>
+                <p>
+                  <WiDayCloudy className="details-icons" />
+                </p>
+                <p>13°</p>
+              </div>
+            </div>
+          </div>
+          <div className="hour-container">
+            <h3>DAILY FORECAST</h3>
+            <hr />
+            <div className="details-main">
+              <div className="details-hour">
+                <p>Wed</p>
+                <p>
+                  <WiDayCloudy className="details-icons" />
+                </p>
+                <p>{weatherData.celecius}°</p>
+              </div>
+              <div className="details-hour">
+                <p>Thu</p>
+                <p>
+                  <WiDayCloudy className="details-icons" />
+                </p>
+                <p>13°</p>
+              </div>
+              <div className="details-hour">
+                <p>Fri</p>
+                <p>
+                  <WiDayCloudy className="details-icons" />
+                </p>
+                <p>13°</p>
+              </div>
+              <div className="details-hour">
+                <p>Sat</p>
+                <p>
+                  <WiDayCloudy className="details-icons" />
+                </p>
+                <p>13°</p>
+              </div>
+                <div className="details-hour">
+                <p>Sun</p>
                 <p>
                   <WiDayCloudy className="details-icons" />
                 </p>

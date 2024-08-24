@@ -119,21 +119,7 @@
  letter-spacing: 1rem;
  font-weight: 300;
 }
-@media screen and (max-width: 750px) {
 
-  .date-time {
-    position: absolute;
-    top: 5px;
-    right: 0;
-    font-size: 0.9rem;
-    font-weight: 300;
-  }
-  .search-div{
-    display: flex;
-    justify-content: start;
-    
-  }
-}
 .more-details{
   height: auto;
   margin-left: 2px;
@@ -187,4 +173,129 @@ font-weight: 700;
 .details-hour:hover {
   transform: scale(1.05);
   transition: transform 0.2s ease;
+}
+/* @media screen and (max-width: 750px) {
+  .Home-container{
+    width: 100%;
+  }
+.Nav-container{
+  width: 100%;
+  
+}
+  .date-time {
+    position: absolute;
+    top: 5px;
+    right: 0;
+    font-size: 0.9rem;
+    font-weight: 300;
+  }
+  .search-div{
+    display: flex;
+    justify-content: start;
+    
+  }
+} */
+@media screen and (max-width: 750px) {
+  .Nav-container {
+    flex-direction: column; 
+    align-items: flex-start; 
+    padding: 20px; 
+  }
+  .Nav-container h1 {
+    font-size: 1.5rem; 
+    margin-left: 0;
+    text-align: center; 
+    width: 100%; 
+  }
+
+  .search-div {
+    justify-content: center; 
+  }
+
+  .Nav-container form {
+    max-width: 100%;
+    margin-top: 10px; 
+  }
+
+  .date-time {
+    position: static; 
+    text-align: center; 
+    margin-top: 10px;
+    width: 100%;
+  }
+  .weather-container {
+    flex-direction: column;
+    padding: 10px; 
+  }
+
+  .weather-card {
+    width: 90%; 
+    margin: 0 auto; 
+    padding-bottom: 20px; 
+  }
+
+  .weather-card h1 {
+    font-size: 2.5rem; 
+  }
+
+  .weather-card h2 {
+    font-size: 1.8rem;
+  }
+
+  .cloud-image {
+    width: 150px;
+  }
+
+  .humidity-img {
+    width: 40px; 
+  }
+
+  .details {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .details p {
+    font-size: 1.2rem;
+  }
+  .details-main {
+    flex-direction: column; 
+  }
+
+  .details-hour {
+    min-width: 80px; 
+    max-width: 100px;
+  }
+
+  .hour-container {
+    overflow-x: auto; 
+    white-space: nowrap; 
+  }
+
+  .hour-container h3 {
+    font-size: 1.2rem; 
+    text-align: left;
+  }
+  .Home-container {
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .more-details {
+    width: 100%; 
+    margin-left: 0;
+  }
+
+  .sun-details {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .sun-details p {
+    font-size: 1rem;
+  }
+
+  .details-icons {
+    font-size: 1.5rem; 
+  }
 }
