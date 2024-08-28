@@ -13,7 +13,6 @@ import axios from "axios";
 
 function Home() {
   const [searchInput, setSearchInput] = useState("");
-
   const [weatherData, setWeatherData] = useState({
     celecius: 18.25,
     name: "London",
@@ -23,15 +22,39 @@ function Home() {
     sunset: "06:00 PM",
     highTemp: 20,
     lowTemp: 15,
+    icon: "",
   });
 
-  const { weather, setWeather } = useStateContext(); // Access context
-
-  console.log(weather);
+  const { weather, setWeather } = useStateContext();
   const navigate = useNavigate();
   const userName = JSON.parse(localStorage.getItem("user"));
 
+  const fetchWeatherData = (city = "London") => {
+    const API = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=3a01979fde01a73794e7e2bbce5fe4d3&units=metric`;
+    axios
+      .get(API)
+      .then((res) => {
+        const iconCode = res.data.weather[0].icon;
+        const iconUrl = `http://openweathermap.org/img/wn/${iconCode}@2x.png`;
 
+        setWeatherData({
+          celecius: res.data.main.temp,
+          name: res.data.name,
+          humidity: res.data.main.humidity,
+          speed: res.data.wind.speed,
+          sunrise: new Date(res.data.sys.sunrise * 1000).toLocaleTimeString(),
+          sunset: new Date(res.data.sys.sunset * 1000).toLocaleTimeString(),
+          highTemp: res.data.main.temp_max,
+          lowTemp: res.data.main.temp_min,
+          icon: iconUrl,
+        });
+      })
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    fetchWeatherData(); // Fetch weather data for London on initial load
+  }, []);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -40,37 +63,31 @@ function Home() {
 
   const handleClick = () => {
     if (searchInput !== "") {
-      const API = ` https://api.openweathermap.org/data/2.5/weather?q=${searchInput}&appid=3a01979fde01a73794e7e2bbce5fe4d3&units=metric`;
-      axios
-        .get(API)
-        .then((res) => {
-          console.log(res.data);
-          setWeatherData({
-//             ...weatherData,
-//             celecius: res.data.main.temp,
-//             name: res.data.name,
-//             humidity: res.data.main.humidity,
-//             speed: res.data.wind.speed,
-//             sunrice :new Date(weatherData.sys.sunrise * 1000).toLocaleTimeString(),
-//             sunset:new Date(weatherData.sys.sunset * 1000).toLocaleTimeString(),
-// temp:res.data.main.temp
-celecius: res.data.main.temp,
-            name: res.data.name,
-            humidity: res.data.main.humidity,
-            speed: res.data.wind.speed,
-            sunrise: new Date(res.data.sys.sunrise * 1000).toLocaleTimeString(),
-            sunset: new Date(res.data.sys.sunset * 1000).toLocaleTimeString(),
-            highTemp: res.data.main.temp_max,
-            lowTemp: res.data.main.temp_min,
-
-          });
-        })
-        .catch((err) => console.log(err));
+      fetchWeatherData(searchInput);
     }
   };
-   const date = new Date().toLocaleDateString();
 
+ // Get and display current time
+ const getLocalTime = () => {
+  const date = new Date();
+  return date.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  });
+};
 
+const [localTime, setLocalTime] = useState(getLocalTime());
+
+useEffect(() => {
+  const timer = setInterval(() => {
+    setLocalTime(getLocalTime());
+  }, 1000);
+
+  return () => clearInterval(timer);
+}, []);
+ 
+  const date = new Date().toLocaleDateString();
 
   return (
     <div className="Home-container">
@@ -95,8 +112,12 @@ celecius: res.data.main.temp,
 
       <div className="weather-container">
         <div className="weather-card">
-          {/* <h3>Welcome home {userName.name}</h3> */}
-          <img className="cloud-image" src={clouds} alt="" />
+        <img
+            className="cloud-image"
+            src={weatherData.icon}
+            alt="Weather Icon"
+          /> 
+            <p className="localTime">Local Time : {localTime} </p>
           <h1>{weatherData.celecius}°c</h1>
           <h2>{weatherData.name}</h2>
           <div className="details">
