@@ -10,12 +10,9 @@ import wind from "../Assets/sky.png";
 import { WiDayCloudy } from "react-icons/wi";
 import "./Home.css";
 import clouds from "../Assets/weather02-512.webp";
-import humidity from "../Assets/humidity.png";
-import wind from "../Assets/sky.png";
 import axios from "axios";
 import Forecast from "./forecast";
 
-import axios from "axios";
 function Home() {
   const [searchInput, setSearchInput] = useState("");
   const [weatherData, setWeatherData] = useState({
