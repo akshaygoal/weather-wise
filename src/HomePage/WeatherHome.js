@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IoIosSearch } from "react-icons/io";
@@ -10,26 +11,28 @@ import clouds from "../Assets/weather02-512.webp";
 import humidity from "../Assets/humidity.png";
 import wind from "../Assets/sky.png";
 import axios from "axios";
+import Forecast from "./forecast";
 
 function Home() {
   const [searchInput, setSearchInput] = useState("");
   const [weatherData, setWeatherData] = useState({
-    celecius: 18.25,
-    name: "London",
-    humidity: 70,
-    speed: 5.12,
-    sunrise: "06:00 AM",
-    sunset: "06:00 PM",
-    highTemp: 20,
-    lowTemp: 15,
+    celecius: "",
+    name: "",
+    humidity: "",
+    speed: "",
+    sunrise: "",
+    sunset: "",
+    highTemp: "",
+    lowTemp: "",
     icon: "",
+    lat: "", // Add lat
+    lon: "", // Add lon
   });
 
   const { weather, setWeather } = useStateContext();
   const navigate = useNavigate();
-  const userName = JSON.parse(localStorage.getItem("user"));
 
-  const fetchWeatherData = (city = "London") => {
+  const fetchWeatherData = (city = "kerala") => {
     const API = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=3a01979fde01a73794e7e2bbce5fe4d3&units=metric`;
     axios
       .get(API)
@@ -47,13 +50,15 @@ function Home() {
           highTemp: res.data.main.temp_max,
           lowTemp: res.data.main.temp_min,
           icon: iconUrl,
+          lat: res.data.coord.lat, // Set lat
+          lon: res.data.coord.lon, // Set lon
         });
       })
       .catch((err) => console.log(err));
   };
 
   useEffect(() => {
-    fetchWeatherData(); // Fetch weather data for London on initial load
+    fetchWeatherData();
   }, []);
 
   const handleSearch = (e) => {
@@ -66,27 +71,26 @@ function Home() {
       fetchWeatherData(searchInput);
     }
   };
+  
+  const getLocalTime = () => {
+    const date = new Date();
+    return date.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    });
+  };
 
- // Get and display current time
- const getLocalTime = () => {
-  const date = new Date();
-  return date.toLocaleTimeString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-  });
-};
+  const [localTime, setLocalTime] = useState(getLocalTime());
 
-const [localTime, setLocalTime] = useState(getLocalTime());
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setLocalTime(getLocalTime());
+    }, 1000);
 
-useEffect(() => {
-  const timer = setInterval(() => {
-    setLocalTime(getLocalTime());
-  }, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
-  return () => clearInterval(timer);
-}, []);
- 
   const date = new Date().toLocaleDateString();
 
   return (
@@ -112,12 +116,8 @@ useEffect(() => {
 
       <div className="weather-container">
         <div className="weather-card">
-        <img
-            className="cloud-image"
-            src={weatherData.icon}
-            alt="Weather Icon"
-          /> 
-            <p className="localTime">Local Time : {localTime} </p>
+          <img className="cloud-image" src={weatherData.icon} alt="Weather Icon" />
+          <p className="localTime">Local Time : {localTime} </p>
           <h1>{weatherData.celecius}°c</h1>
           <h2>{weatherData.name}</h2>
           <div className="details">
@@ -147,7 +147,6 @@ useEffect(() => {
               <GiSunset className="details-icons" />
               <p>Set: {weatherData.sunset}</p>
             </div>
-
             <div>
               <FaTemperatureArrowUp className="details-icons" />
               <p>High: {weatherData.highTemp}°c</p>
@@ -157,88 +156,7 @@ useEffect(() => {
               <p>Low:{weatherData.lowTemp}°c</p>
             </div>
           </div>
-          <div className="hour-container">
-            <h3>3 HOURS STEO FORECAST</h3>
-            <hr />
-            <div className="details-main">
-              <div className="details-hour">
-                <p>10:00 AM</p>
-                <p>
-                  <WiDayCloudy className="details-icons" />
-                </p>
-                <p>{weatherData.celecius}°</p>
-              </div>
-              <div className="details-hour">
-                <p>01:00 AM</p>
-                <p>
-                  <WiDayCloudy className="details-icons" />
-                </p>
-                <p>13°</p>
-              </div>
-              <div className="details-hour">
-                <p>03:00 AM</p>
-                <p>
-                  <WiDayCloudy className="details-icons" />
-                </p>
-                <p>13°</p>
-              </div>
-              <div className="details-hour">
-                <p>06:00 AM</p>
-                <p>
-                  <WiDayCloudy className="details-icons" />
-                </p>
-                <p>13°</p>
-              </div>
-                <div className="details-hour">
-                <p>09:00 AM</p>
-                <p>
-                  <WiDayCloudy className="details-icons" />
-                </p>
-                <p>13°</p>
-              </div>
-            </div>
-          </div>
-          <div className="hour-container">
-            <h3>DAILY FORECAST</h3>
-            <hr />
-            <div className="details-main">
-              <div className="details-hour">
-                <p>Wed</p>
-                <p>
-                  <WiDayCloudy className="details-icons" />
-                </p>
-                <p>{weatherData.celecius}°</p>
-              </div>
-              <div className="details-hour">
-                <p>Thu</p>
-                <p>
-                  <WiDayCloudy className="details-icons" />
-                </p>
-                <p>13°</p>
-              </div>
-              <div className="details-hour">
-                <p>Fri</p>
-                <p>
-                  <WiDayCloudy className="details-icons" />
-                </p>
-                <p>13°</p>
-              </div>
-              <div className="details-hour">
-                <p>Sat</p>
-                <p>
-                  <WiDayCloudy className="details-icons" />
-                </p>
-                <p>13°</p>
-              </div>
-                <div className="details-hour">
-                <p>Sun</p>
-                <p>
-                  <WiDayCloudy className="details-icons" />
-                </p>
-                <p>13°</p>
-              </div>
-            </div>
-          </div>
+          <Forecast lat={weatherData.lat} lon={weatherData.lon} />
         </div>
       </div>
     </div>
