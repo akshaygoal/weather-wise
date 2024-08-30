@@ -62,10 +62,9 @@
 .weather-container {
   display: flex;
   justify-content: center;
- 
   width: 100%;
   height: auto;
-  padding: 20px;
+  padding: 5px;
   text-align: center;
   background-color: #ffffff;
 }
@@ -80,33 +79,220 @@
   background-size: cover;
   background-position: center;
   padding-bottom: 30px;
-   /* background: url(../Assets/istockphoto-1437408066-612x612.jpg);  */
-  
+  /* background: url(../Assets/istockphoto-1437408066-612x612.jpg);  */
+
   background-size: cover;
   background-position: center;
 }
-.weather-card  h1{
-    font-size: 70px;
-    font-weight: 500;
-    margin-top: 15px;
+.weather-card h1 {
+  font-size: 70px;
+  font-weight: 500;
+  margin-top: 15px;
 }
-.weather-card  h2{
-    font-size: 40px;
-    font-weight: 400;
-    margin-top: 10px;
+.weather-card h2 {
+  font-size: 40px;
+  font-weight: 400;
+  margin-top: 10px;
 }
 .cloud-image {
   width: 200px;
 }
-.humidity-img{
-    width: 50px;
+.humidity-img {
+  width: 50px;
 }
-.details{
-    display: grid;
+.details {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: 1fr 1fr;
+}
+.details p {
+  font-size: 25px;
+}
+.date-time {
+  position: absolute;
+  left: 60px;
+  top: 70px;
+  color: #ffffff;
+  font-size: 1.1rem;
+  letter-spacing: 1rem;
+  font-weight: 300;
+}
+
+.more-details {
+  height: auto;
+  margin-left: 2px;
+  width: 70%;
+  border-radius: 15px;
+  background: linear-gradient(30deg, rgb(76, 76, 232), rgb(239, 239, 239));
+}
+.sun-details {
+  display: flex;
+  width: 100%;
+  height: auto;
+  padding: 30px 40px 0px 30px;
+  justify-content: space-around;
+}
+.sun-details p {
+  font-size: 1.2rem;
+}
+.details-icons {
+  font-size: 2rem;
+  font-weight: 700;
+}
+.forecast-icons{
+  font-size: 1.1rem;
+}
+.hour-container {
+  padding: 20px;
+  margin-top: 20px;
+}
+.hour-container h3 {
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  text-align: left;
+  font-weight: 600;
+}
+.details-main {
+  display: flex;
+  justify-content: space-between;
+}
+.details-hour {
+  margin-top: 5px;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  min-width: 100px;
+  max-width: 120px;
+  
+}
+.details-hour p {
+  margin: 5px 0;
+  font-size: 1rem;
+}
+.details-hour:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}
+.localTime {
+  font-weight: 500;
+  font-size: 1.5rem;
+}
+@media screen and (max-width: 750px) {
+  .Nav-container {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+  }
+  .Nav-container h1 {
+    font-size: 1.5rem;
+    margin-left: 0;
+    text-align: center;
+    width: 100%;
+  }
+
+  .search-div {
     justify-content: center;
-    align-items: center;
-    grid-template-columns: 1fr 1fr;
-}
-.details p{
-    font-size: 25px;
+  }
+
+  .Nav-container form {
+    max-width: 100%;
+    margin-top: 10px;
+  }
+
+  .date-time {
+    position: static;
+    text-align: center;
+    margin-top: 10px;
+    width: 100%;
+  }
+  .weather-container {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .weather-card {
+    width: 100%;
+    margin: 0 auto;
+    padding-bottom: 20px;
+    border-radius: 2px;
+  }
+
+  .weather-card h1 {
+    font-size: 2.5rem;
+  }
+
+  .weather-card h2 {
+    font-size: 1.8rem;
+  }
+
+  .cloud-image {
+    width: 150px;
+  }
+
+  .humidity-img {
+    width: 40px;
+  }
+
+  .details {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .details p {
+    font-size: 1.2rem;
+  }
+  .details-main {
+    flex-direction: column;
+  }
+
+  .details-hour {
+    min-width: 80px;
+    max-width: 100px;
+  }
+
+  .hour-container {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .hour-container h3 {
+    font-size: 1.2rem;
+    text-align: left;
+  }
+  .Home-container {
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .more-details {
+    width: 100%;
+    margin-left: 0;
+    border-radius: 2px;
+  }
+
+  .sun-details {
+    flex-direction: column;
+    padding: 20px;
+    gap: 10px;
+  }
+
+  .sun-details p {
+    font-size: 1rem;
+  }
+
+  .details-icons {
+    font-size: 1.5rem;
+  }
+  .localTime {
+    font-weight: 500;
+    font-size: 1.2rem;
+  }
+  .localTime{
+    font-weight: 500;
+    font-size: 1.3rem;
+    color: #1d1818;
+  }
 }
