@@ -5,6 +5,8 @@ import { IoIosSearch } from "react-icons/io";
 import { GiSunrise, GiSunset } from "react-icons/gi";
 import { FaTemperatureArrowUp, FaTemperatureArrowDown } from "react-icons/fa6";
 import { useStateContext } from "../Context/index";
+import humidity from "../Assets/humidity.png";
+import wind from "../Assets/sky.png";
 import { WiDayCloudy } from "react-icons/wi";
 import "./Home.css";
 import clouds from "../Assets/weather02-512.webp";
@@ -13,6 +15,7 @@ import wind from "../Assets/sky.png";
 import axios from "axios";
 import Forecast from "./forecast";
 
+import axios from "axios";
 function Home() {
   const [searchInput, setSearchInput] = useState("");
   const [weatherData, setWeatherData] = useState({
@@ -96,7 +99,7 @@ function Home() {
   return (
     <div className="Home-container">
       <nav className="Nav-container">
-        <h1>Weather Wisee</h1>
+        <h1>Weather Wise</h1>
         <h3 className="date-time">{date}</h3>
         <div className="search-div">
           <form onSubmit={handleSearch}>
@@ -153,7 +156,7 @@ function Home() {
             </div>
             <div>
               <FaTemperatureArrowDown className="details-icons" />
-              <p>Low:{weatherData.lowTemp}°c</p>
+              <p>Low: {weatherData.lowTemp}°c</p>
             </div>
           </div>
           <Forecast lat={weatherData.lat} lon={weatherData.lon} />

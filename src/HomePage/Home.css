@@ -290,4 +290,9 @@
     font-weight: 500;
     font-size: 1.2rem;
   }
+  .localTime{
+    font-weight: 500;
+    font-size: 1.3rem;
+    color: #1d1818;
+  }
 }
