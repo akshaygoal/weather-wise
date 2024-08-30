@@ -140,7 +140,7 @@
   font-size: 2rem;
   font-weight: 700;
 }
-.forecast-icons{
+.forecast-icons {
   font-size: 1.1rem;
 }
 .hour-container {
@@ -166,7 +166,6 @@
   flex: 1;
   min-width: 100px;
   max-width: 120px;
-  
 }
 .details-hour p {
   margin: 5px 0;
@@ -249,8 +248,10 @@
   }
 
   .details-hour {
-    min-width: 80px;
-    max-width: 100px;
+    min-width: 80%;
+    max-width: 90%;
+
+    margin-left: 17px;
   }
 
   .hour-container {
@@ -290,7 +291,7 @@
     font-weight: 500;
     font-size: 1.2rem;
   }
-  .localTime{
+  .localTime {
     font-weight: 500;
     font-size: 1.3rem;
     color: #1d1818;

@@ -7,7 +7,6 @@ import { FaTemperatureArrowUp, FaTemperatureArrowDown } from "react-icons/fa6";
 import { useStateContext } from "../Context/index";
 import humidity from "../Assets/humidity.png";
 import wind from "../Assets/sky.png";
-import { WiDayCloudy } from "react-icons/wi";
 import "./Home.css";
 import clouds from "../Assets/weather02-512.webp";
 import axios from "axios";
@@ -25,8 +24,8 @@ function Home() {
     highTemp: "",
     lowTemp: "",
     icon: "",
-    lat: "", // Add lat
-    lon: "", // Add lon
+    lat: "",
+    lon: "",
   });
 
   const { weather, setWeather } = useStateContext();
@@ -50,8 +49,8 @@ function Home() {
           highTemp: res.data.main.temp_max,
           lowTemp: res.data.main.temp_min,
           icon: iconUrl,
-          lat: res.data.coord.lat, // Set lat
-          lon: res.data.coord.lon, // Set lon
+          lat: res.data.coord.lat, 
+          lon: res.data.coord.lon,
         });
       })
       .catch((err) => console.log(err));
